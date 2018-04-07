@@ -1,4 +1,7 @@
-Vaishak
-Darshan
-Sanay
-Avinash
+Name                             - 25% Vaishak 25% Avinash 25% Darshan 25% Sanay
+
+Grammar                          - 25% Vaishak 25% Avinash 25% Darshan 25% Sanay
+
+Operators and Keywords           - 50% Vaishak 50% Avinash
+
+Lexical Analysis and Programs    - 50% Darshan 50% Sanay
