@@ -1,0 +1,75 @@
+Grammar in BNF format 
+
+Converting Final submitted grammar to BNF form.
+
+
+Program ::= ‘</’ Block ‘/>’
+Block ::= Assignment Block | Condition Block | Loop Block|
+     NoreturnOp Block | StackDecl Block | StackOp Block | NULL
+
+% call
+NoreturnOp ::= 'giveout'  Datatype | 'giveout' StackOP
+Input ::= 'takein'
+Datatype ::= Num | Bool | Id
+
+%stack specs
+StackDecl ::= stack Id
+StackOp ::= Id Stackfunc
+Stackfunc ::= Push | Pop | Empty
+Push ::= '.push' '{' Element '}'
+Element ::= DataType| BoolExpr| Expr
+Pop ::= '.pop' '{' '}'
+Empty ::= '.isEmpty' '{' '}'
+%ifelse
+Condition ::= '('If_part ')' | '('If_part ')' '(' Else_part ')'
+If_part ::= 'if' '{' ConditionCheck '}' '</' Block '/>'
+Else_part ::= 'else' '</'  Block '/>'
+
+
+%loop
+Loop ::= 'while' '{' ConditionCheck '}' '</'Block '/>'
+
+%comparison functions.
+ConditionCheck ::= BoolCompare| IntegerCompare | StackOp CompareInt Num
+IntegerCompare ::= Expr CompareInt Expr
+BoolCompare ::= BoolExpr CompareBool BoolExpr
+
+
+% assignment
+Assignment ::= Id '=' Value
+Value ::= Input | Expr | BoolExpr | StackOp
+
+%integerExpression.
+Expr ::= Term | Term SubExpr
+SubExpr ::= AdditionOp Term
+Term ::= Factor | Factor SubTerm
+SubTerm ::= MultiplicationOp Factor
+Factor ::= Id | Num | '{' Expr '}'
+
+%boolean expression.
+BoolExpr ::= BoolTerm | BoolTerm  BoolSubExpression
+BoolSubExpression::=BooleanOR  BoolTerm
+BoolTerm ::= BoolFactor SubBoolTerm
+SubBoolTerm ::= BooleanAnd  BoolFactor
+BoolFactor : ::= Id | Bool | '(' BoolExpr ')'
+
+
+
+%operators
+MultiplicationOp ::= '*' | '/' | '%'
+AdditionOp ::= '+' | '-'
+CompareInt ::= '>' | '<' | '==' | '<=' | '>=' | '!='
+BooleanAnd ::= 'and'
+BooleanOR ::= 'or'
+CompareBool ::= 'is'
+
+%booleanTypes
+Bool ::= 'T' | 'F'
+
+%integer
+Num ::= 0|1|2|3|4|5|6|7|8|9
+Id ::= 'a' |  'b' |  'c' |  'd' |  'e' |  'f' |  'g' |  'h' |  'i' |  'j' |  'k' |  'l' |  'm'
+          | 'n' |  'o' |  'p'|'q' |  'r' |  's' |  't' |  'u' |  'v' |  'w' |  'x' |  'y' |  'z' |
+	'A' |  'B' |  'C' |  'D' |  'E' |  'F' |  'G' |  'H' |  'I' |  'J' |  'K'
+          |  'L' |  'M' |  'N' |  'O' |  'P' |  'Q' |  'R' |  'S' |  'T' |  'U' |  'V'
+          |'W' |  'X' |  'Y' |  'Z' | NULL| Id
