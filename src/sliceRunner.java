@@ -1,18 +1,20 @@
-import java.io.FileInputStream;
-import java.io.PrintWriter;
-
+import org.antlr.runtime.CharStream;
+import org.antlr.runtime.CharStreamState;
 import org.antlr.v4.runtime.ANTLRInputStream;
+import org.antlr.v4.runtime.CharStreams;
 import org.antlr.v4.runtime.CommonTokenStream;
 import org.antlr.v4.runtime.ParserRuleContext;
 import org.antlr.v4.runtime.tree.ParseTreeWalker;
 
+import java.io.FileInputStream;
+import java.io.PrintWriter;
+
 public class sliceRunner {
     public static void main(String[] args) throws Exception {
         //Please specify the input filename as an argument when running this file
-        FileInputStream fis = new FileInputStream("/Users/darshan/IdeaProjects/SER502-Spring2018-Team30/src/Input.txt");
-        ANTLRInputStream input = new ANTLRInputStream(fis);
 
-        sliceLexer lexer = new sliceLexer(input);
+        org.antlr.v4.runtime.CharStream data =  CharStreams.fromFileName("/Users/sanaydevi/Desktop/ser 502/SER502-Spring2018-Team30/src/Input.txt");
+        sliceLexer lexer = new sliceLexer(data);
 
         CommonTokenStream tokens = new CommonTokenStream(lexer);
 
