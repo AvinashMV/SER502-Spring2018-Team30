@@ -12,5 +12,3 @@ To build the compiler:
 To run it:
 
 Link To Youtube Video:
-
-Youtube
