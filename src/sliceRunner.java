@@ -9,14 +9,14 @@ import org.antlr.v4.runtime.tree.ParseTreeWalker;
 public class sliceRunner {
     public static void main(String[] args) throws Exception {
         //Please specify the input filename as an argument when running this file
-        FileInputStream fis = new FileInputStream(args[0]);
+        FileInputStream fis = new FileInputStream(Input.txt);
         ANTLRInputStream input = new ANTLRInputStream(fis);
 
-        SliceLexer lexer = new SliceLexer(input);
+        sliceLexer lexer = new sliceLexer(input);
 
         CommonTokenStream tokens = new CommonTokenStream(lexer);
 
-        SliceParser parser = new SliceParser(tokens);
+        sliceParser parser = new sliceParser(tokens);
         ParserRuleContext tree = parser.start();
         // print LISP-style tree in file parseTree.pt
         try {
@@ -33,7 +33,7 @@ public class sliceRunner {
         walker.walk(extractor, tree); // initiate walk of tree with listener
         // print the output in the file output.bjav
         try {
-            PrintWriter writer = new PrintWriter("intermediate.pyj", "UTF-8");
+            PrintWriter writer = new PrintWriter("intermediate.sl", "UTF-8");
             for (int i = 1; i < extractor.op.size(); i++) {
                 writer.println(extractor.op.get(i));
             }
