@@ -217,7 +217,7 @@ public class sliceBaseListener implements sliceListener {
 			op.set(pos, prev);
 		}
 	}
-	}
+
 	/**
 	 * {@inheritDoc}
 	 *
@@ -264,8 +264,8 @@ public class sliceBaseListener implements sliceListener {
 	 */
 	@Override public void exitElsepart(sliceParser.ElsepartContext ctx) {
 		op.add("TESTFGOTO");
-		ifElseCond.push(line_no);
-		line_no++;
+		ifElseCond.push(line);
+		line++;
 	}
 	/**
 	 * {@inheritDoc}
@@ -412,7 +412,7 @@ public class sliceBaseListener implements sliceListener {
 		return a;
 	}
 	@Override public void exitSubExpr(sliceParser.SubExprContext ctx) {
-		line_no++;
+		line++;
 		op.add(checkAdditionOp(ctx));
 	}
 	/**
@@ -532,9 +532,10 @@ public class sliceBaseListener implements sliceListener {
 	 * <p>The default implementation does nothing.</p>
 	 */
 	@Override public void exitSubBoolTerm(sliceParser.SubBoolTermContext ctx) {
-		if(ctx.BooleanAnd() != null){
+		if (ctx.BooleanAnd() != null) {
 			line++;
 			op.add("AND");
+		}
 	}
 	/**
 	 * {@inheritDoc}

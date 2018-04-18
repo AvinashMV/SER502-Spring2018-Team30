@@ -9,7 +9,7 @@ import org.antlr.v4.runtime.tree.ParseTreeWalker;
 public class sliceRunner {
     public static void main(String[] args) throws Exception {
         //Please specify the input filename as an argument when running this file
-        FileInputStream fis = new FileInputStream(Input.txt);
+        FileInputStream fis = new FileInputStream("/Users/darshan/IdeaProjects/SER502-Spring2018-Team30/src/Input.txt");
         ANTLRInputStream input = new ANTLRInputStream(fis);
 
         sliceLexer lexer = new sliceLexer(input);
@@ -17,7 +17,7 @@ public class sliceRunner {
         CommonTokenStream tokens = new CommonTokenStream(lexer);
 
         sliceParser parser = new sliceParser(tokens);
-        ParserRuleContext tree = parser.start();
+        ParserRuleContext tree = parser.program();
         // print LISP-style tree in file parseTree.pt
         try {
             PrintWriter writer = new PrintWriter("parseTree.pt", "UTF-8");
