@@ -6,6 +6,6 @@ Operators and Keywords           - 50% Vaishak 50% Avinash
 
 Lexical Analysis and Programs    - 50% Darshan 50% Sanay
 
-Lexer and Parser 		 - 50% Darshan 50% Sanay
+Lexer and Parser files		 - 50% Darshan 50% Sanay
 
-Listener and Runner		 - 50% Vaishak 50% Avinash
+Listener and Runner files        - 50% Vaishak 50% Avinash
