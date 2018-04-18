@@ -1,2 +1,4 @@
 #ignoring idea files
 .idea/*
+#ignore OS files
+.DS_Store
