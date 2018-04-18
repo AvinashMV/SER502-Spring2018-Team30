@@ -5,3 +5,7 @@ Grammar                          - 25% Vaishak 25% Avinash 25% Darshan 25% Sanay
 Operators and Keywords           - 50% Vaishak 50% Avinash
 
 Lexical Analysis and Programs    - 50% Darshan 50% Sanay
+
+Lexer and Parser 		 - 50% Darshan 50% Sanay
+
+Listener and Runner		 - 50% Vaishak 50% Avinash
