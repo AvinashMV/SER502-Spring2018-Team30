@@ -245,11 +245,6 @@ public class sliceBaseListener implements sliceListener {
 		op.set(pos, prev);
 		line++;
 
-		//Check again ///////////// */
-		op.add("</");
-		line++;
-		op.add("/>");
-		line++;
 	}
 	/**
 	 * {@inheritDoc}
