@@ -1,4 +1,5 @@
 #ignoring idea files
 .idea/*
+SER502-Spring2018-Team30.iml
 #ignore OS files
 .DS_Store
