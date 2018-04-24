@@ -68,7 +68,7 @@ public class sliceBaseListener implements sliceListener {
 	 */
 	@Override public void exitNoreturnOp(sliceParser.NoreturnOpContext ctx) {
 		line++;
-		op.add("giveout");
+		op.add("GIVEOUT");
 	}
 	/**
 	 * {@inheritDoc}
@@ -77,7 +77,7 @@ public class sliceBaseListener implements sliceListener {
 	 */
 	@Override public void enterInput(sliceParser.InputContext ctx) {
 		line++;
-		op.add("takein");
+		op.add("TAKEIN");
 	}
 	/**
 	 * {@inheritDoc}
@@ -115,7 +115,7 @@ public class sliceBaseListener implements sliceListener {
 	 */
 	@Override public void enterStackDec(sliceParser.StackDecContext ctx) {
 		line++;
-		op.add("stack" +ctx.Id());
+		op.add("STACK" +ctx.Id());
 	}
 	/**
 	 * {@inheritDoc}
@@ -402,7 +402,7 @@ public class sliceBaseListener implements sliceListener {
 		String a="";
 		switch(ctx.AdditionOp().toString()){
 			case "+":
-				a = "ADD";
+				a = "ADDITION";
 				break;
 			case "-":
 				a = "SUBTRACT";

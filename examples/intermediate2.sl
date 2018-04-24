@@ -1,0 +1,27 @@
+</
+	PUSH 2
+	STORE a
+	PUSH 3
+	STORE b
+	PUSH a
+	PUSH b
+	ADDITION
+	STORE c
+	PUSH a
+	PUSH b
+	SUBTRACT
+	STORE d
+	PUSH a
+	PUSH b
+	MULTIPLY
+	STORE e
+	PUSH a
+	PUSH b
+	DIVIDE
+	STORE f
+	PUSH a
+	PUSH b
+	MODULUS
+	STORE g
+/>
+
