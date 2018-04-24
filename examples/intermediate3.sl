@@ -7,10 +7,12 @@
 	PUSH b
 	ADD
 	STORE c
+	IF
 	PUSH c
 	PUSH 4
 	GREATEREQUAL
 	</
+		WHILE
 		PUSH c
 		PUSH 0
 		NOTEQUALTO
@@ -22,15 +24,16 @@
 			ADD
 			STORE k
 			PUSH k
-			giveout
+			giveout 29
 		/>
-		TESTFGOTO 29
-		PUSH True
-		TESTTGOTO 14
-	/> 32
-	TESTFGOTO 37
+		TESTFGOTO
+		PUSH True 32
+		TESTTGOTO 14 37
+	/>
+	TESTFGOTO
 	PUSH True
 	TESTTGOTO
+	ELSE
 	</
 		PUSH c
 		giveout
