@@ -97,6 +97,21 @@ class interpreter:
                # print(self.executionlist)
 
 
+    def equals(self):
+        temp1 = self.stack.pop()
+        if temp1 in self.symboldict:
+            temp1 = self.symboldict[ temp1 ]
+        else:
+            temp1 = int(temp1)
+
+        temp2 = self.stack.pop()
+
+        if temp2 in self.symboldict:
+            temp2 = int(self.symboldict[ temp2 ])
+        else:
+            temp2 = int(temp2)
+
+        self.comparison = temp2 == temp1
 
     def greater(self):
         temp1=self.stack.pop()
@@ -212,6 +227,7 @@ class interpreter:
         temp2 = self.symboldict[self.stack.pop()]
         temp3= int(temp2) % int(temp1)
         self.stack.append(temp3)
+
 
 
 if __name__=="__main__":
