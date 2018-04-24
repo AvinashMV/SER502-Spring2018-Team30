@@ -1,0 +1,43 @@
+</
+	PUSH 5
+	STORE a
+	PUSH 9
+	STORE b
+	PUSH a
+	PUSH b
+	ADD
+	STORE c
+	IF
+	PUSH c
+	PUSH 4
+	GREATEREQUAL
+	</
+		WHILE
+		PUSH c
+		PUSH 0
+		NOTEQUALTO
+		</
+			PUSH 3
+			STORE a
+			PUSH a
+			PUSH 1
+			ADD
+			STORE k
+			PUSH k
+			giveout 29
+		/>
+		TESTFGOTO
+		PUSH True 32
+		TESTTGOTO 14 37
+	/>
+	TESTFGOTO
+	PUSH True
+	TESTTGOTO
+	ELSE
+	</
+		PUSH c
+		giveout
+	/>
+	TESTFGOTO
+/>
+
