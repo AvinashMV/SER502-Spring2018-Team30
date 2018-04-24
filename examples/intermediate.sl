@@ -1,4 +1,4 @@
-</
+READ
 	PUSH 2
 	STORE a
 	PUSH 3
@@ -7,5 +7,5 @@
 	PUSH b
 	ADD
 	STORE c
-/>
+END
 
