@@ -27,50 +27,72 @@ class interpreter:
                     elif self.if_flag != self.comparison: # if condition is false.
                         while "/>" not in line:
                             line=next(f)
-                    
+
+                #will push to stack.
+                # PUSH a , PUSH 3
                 elif self.opcode=="PUSH":
                     self.push()
 
+                #will pop topmost element and store in arguement.
+                #STORE a
                 elif self.opcode=="STORE":
                     self.store()
 
-
+                # Pop two elements and add them.
+                # push the result
                 elif self.opcode=="ADDITION":
                     self.addition()
 
+                #Pop two elements and push the result.
                 elif self.opcode=="SUBTRACTION":
                     self.subtraction()
 
+                #pop two elements and push the result.
                 elif self.opcode=="MULTIPLICATION":
                     self.multiplication()
 
-
+                #pop two elements and push the result.
                 elif self.opcode=="DIVISION":
                     self.divide()
 
-
+                #pop two elements and push the result.
                 elif self.opcode=="MODULUS":
                     self.modulus()
 
-
+                #Pop an element and check it's value in symbol table.
+                #print the value.
                 elif self.opcode=="GIVEOUT":
                     self.giveout()
 
+                #sets the if_flag.
                 elif self.opcode=="IF":
                     self.if_flag=True
                     continue
 
+                #pop two elemennts and sets the comparison flag.
                 elif self.opcode=="GREATER":
                     self.greater()
 
+                # pop two elemennts and sets the comparison flag.
                 elif self.opcode =="LESSER":
                     self.lesser()
 
+                # pop two elemennts and sets the comparison flag.
                 elif self.opcode=="GREATEREQUAL":
                     self.greater_equal()
 
+                # pop two elemennts and sets the comparison flag.
                 elif self.opcode=="LESSEREQUAL":
                     self.lesser_equal()
+
+                # pop two elemennts and sets the comparison flag.
+                elif self.opcode =="EQUALS":
+                    self.equals()
+
+                # pop two elemennts and sets the comparison flag.
+                elif self.opcode =="NOTEQULTO":
+                    self.notequalto()
+
 
                # print(self.executionlist)
 
