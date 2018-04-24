@@ -405,7 +405,7 @@ public class sliceBaseListener implements sliceListener {
 				a = "ADDITION";
 				break;
 			case "-":
-				a = "SUBTRACT";
+				a = "SUBTRACTION";
 				break;
 		}
 		return a;
@@ -442,10 +442,10 @@ public class sliceBaseListener implements sliceListener {
 		String a="";
 		switch(ctx.MultiplicationOp().toString()){
 			case "*":
-				a = "MULTIPLY";
+				a = "MULTIPLICATION";
 				break;
 			case "/":
-				a = "DIVIDE";
+				a = "DIVISION";
 				break;
 			case "%":
 				a = "MODULUS";
