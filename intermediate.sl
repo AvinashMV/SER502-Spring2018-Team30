@@ -1,0 +1,11 @@
+</
+PUSH 2
+STORE a
+PUSH 3
+STORE b
+PUSH a
+PUSH b
+ADD
+STORE c
+/>
+
