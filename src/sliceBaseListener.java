@@ -225,6 +225,7 @@ public class sliceBaseListener implements sliceListener {
 	 */
 	@Override public void enterIfpart(sliceParser.IfpartContext ctx) {
 		ifElseCount.push(1);
+		op.add("IF");
 	}
 	/**
 	 * {@inheritDoc}
@@ -245,18 +246,15 @@ public class sliceBaseListener implements sliceListener {
 		op.set(pos, prev);
 		line++;
 
-		//Check again ///////////// */
-		op.add("</");
-		line++;
-		op.add("/>");
-		line++;
 	}
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void enterElsepart(sliceParser.ElsepartContext ctx) { }
+	@Override public void enterElsepart(sliceParser.ElsepartContext ctx) {
+		op.add("ELSE");
+	}
 	/**
 	 * {@inheritDoc}
 	 *
@@ -273,6 +271,7 @@ public class sliceBaseListener implements sliceListener {
 	 * <p>The default implementation does nothing.</p>
 	 */
 	@Override public void enterLoop(sliceParser.LoopContext ctx) {
+		op.add("WHILE");
 		whileStart.push(line);
 	}
 	/**

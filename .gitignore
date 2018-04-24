@@ -1,8 +1,11 @@
 #ignoring idea files
 .idea/*
 out/*
-intermediate.sl
-parseTree.pt
 SER502-Spring2018-Team30.iml
 #ignore OS files
 .DS_Store
+.classpath
+.project
+/bin/
+*.sl
+*.pt
