@@ -63,6 +63,15 @@ class interpreter:
                 elif self.opcode=="GREATER":
                     self.greater()
 
+                elif self.opcode =="LESSER":
+                    self.lesser()
+
+                elif self.opcode=="GREATEREQUAL":
+                    self.greater_equal()
+
+                elif self.opcode=="LESSEREQUAL":
+                    self.lesser_equal()
+
                # print(self.executionlist)
 
 
@@ -85,7 +94,53 @@ class interpreter:
 
 
 
+    def lesser(self):
+        temp1 = self.stack.pop()
+        if temp1 in self.symboldict:
+            temp1 = self.symboldict[ temp1 ]
+        else:
+            temp1 = int(temp1)
 
+        temp2 = self.stack.pop()
+
+        if temp2 in self.symboldict:
+            temp2 = int(self.symboldict[ temp2 ])
+        else:
+            temp2 = int(temp2)
+
+        self.comparison = temp2 < temp1
+
+    def greater_equal(self):
+        temp1 = self.stack.pop()
+        if temp1 in self.symboldict:
+            temp1 = self.symboldict[ temp1 ]
+        else:
+            temp1 = int(temp1)
+
+        temp2 = self.stack.pop()
+
+        if temp2 in self.symboldict:
+            temp2 = int(self.symboldict[ temp2 ])
+        else:
+            temp2 = int(temp2)
+
+        self.comparison = temp2 >= temp1
+
+    def lesser_equal(self):
+        temp1 = self.stack.pop()
+        if temp1 in self.symboldict:
+            temp1 = self.symboldict[ temp1 ]
+        else:
+            temp1 = int(temp1)
+
+        temp2 = self.stack.pop()
+
+        if temp2 in self.symboldict:
+            temp2 = int(self.symboldict[ temp2 ])
+        else:
+            temp2 = int(temp2)
+
+        self.comparison = temp2 <= temp1
 
     def giveout(self):
         var=self.stack.pop()
