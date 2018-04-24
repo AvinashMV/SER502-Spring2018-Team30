@@ -2,8 +2,13 @@
 a = 2
 b = 3
 c = a + b
+giveout c
 d = a - b
+giveout d
 e = a * b
+giveout e
 f = a / b
+giveout f
 g = a % b
+giveout g
 />
