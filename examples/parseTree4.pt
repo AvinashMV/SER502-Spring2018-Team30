@@ -1,0 +1,2 @@
+[]
+(program </ (block (assignment a = (expr (term (factor 2)))) (assignment b = (expr (term (factor 3)))) (condition (ifpart if { (conditionCheck (integerCompare (expr (term (factor a))) > (expr (term (factor 1))))) } </ (block (assignment c = (expr (term (factor a)) (subExpr + (term (factor b))))) (noreturnOp giveout (datatype c))) />))) />)
