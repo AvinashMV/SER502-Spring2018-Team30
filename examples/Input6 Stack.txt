@@ -1,0 +1,9 @@
+</
+a = 2
+b = 3
+stack s1
+s1.push{a}
+s1.pop{}
+s1.isEmpty{}
+giveout s1
+/>
