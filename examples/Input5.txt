@@ -1,7 +1,7 @@
 </
 a = T
 b = T
-if { (a and b) }
+if {a and b}
 </
 c = a + b
 giveout c
