@@ -1,2 +1,0 @@
-[]
-(program </ (block (assignment a = (expr (term (factor 2)))) (assignment b = (expr (term (factor 3)))) (stackDec stack s1) (stackOp s1 (stackfunc (push .push { (datatype a) }))) (assignment c = (stackOp s1 (stackfunc (pop .pop { })))) (noreturnOp giveout (datatype c))) />)
