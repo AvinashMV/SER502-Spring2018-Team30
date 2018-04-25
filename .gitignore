@@ -7,4 +7,5 @@ SER502-Spring2018-Team30.iml
 .classpath
 .project
 /bin/
+/venv/*
 

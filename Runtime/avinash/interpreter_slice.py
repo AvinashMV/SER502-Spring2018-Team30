@@ -1,100 +1,130 @@
 class interpreter:
 
     def __init__(self):
-        self.executionlist=[]
-        self.stack=[]
-        self.symboltable=[]
-        self.symboldict={}
-        self.comparison=False
-        self.if_flag=False
+        self.executionlist = [ ]
+        self.stack = [ ]
+        self.symboltable = [ ]
+        self.symboldict = {}
+        self.comparison = False
+        self.if_flag = False
 
     def readfile(self):
         self.file = input("enter the file: ")
         with open(self.file) as f:
             for line in f:
 
-                #print(line)
-                line= line.rstrip("\n")
-                line= line.rstrip("")
-                self.executionlist=line.split(" ")
+                # print(line)
+                line = line.rstrip("\n")
+                line = line.rstrip("")
+                self.executionlist = line.split(" ")
 
-                self.opcode = self.executionlist[0]
+                self.opcode = self.executionlist[ 0 ]
 
-                if self.opcode=="</":
+                if self.opcode == "</":
                     if self.if_flag == self.comparison:  # if condition is true.
                         continue
 
-                    elif self.if_flag != self.comparison: # if condition is false.
+                    elif self.if_flag != self.comparison:  # if condition is false.
                         while "/>" not in line:
-                            line=next(f)
+                            line = next(f)
 
-                #will push to stack.
+                # will push to stack.
                 # PUSH a , PUSH 3
-                elif self.opcode=="PUSH":
+                elif self.opcode == "PUSH":
                     self.push()
 
-                #will pop topmost element and store in arguement.
-                #STORE a
-                elif self.opcode=="STORE":
+                # will pop topmost element and store in arguement.
+                # STORE a
+                elif self.opcode == "STORE":
                     self.store()
 
                 # Pop two elements and add them.
                 # push the result
-                elif self.opcode=="ADDITION":
+                elif self.opcode == "ADDITION":
                     self.addition()
 
-                #Pop two elements and push the result.
-                elif self.opcode=="SUBTRACTION":
+                # Pop two elements and push the result.
+                elif self.opcode == "SUBTRACTION":
                     self.subtraction()
 
-                #pop two elements and push the result.
-                elif self.opcode=="MULTIPLICATION":
+                # pop two elements and push the result.
+                elif self.opcode == "MULTIPLICATION":
                     self.multiplication()
 
-                #pop two elements and push the result.
-                elif self.opcode=="DIVISION":
+                # pop two elements and push the result.
+                elif self.opcode == "DIVISION":
                     self.divide()
 
-                #pop two elements and push the result.
-                elif self.opcode=="MODULUS":
+                # pop two elements and push the result.
+                elif self.opcode == "MODULUS":
                     self.modulus()
 
-                #Pop an element and check it's value in symbol table.
-                #print the value.
-                elif self.opcode=="GIVEOUT":
+                # Pop an element and check it's value in symbol table.
+                # print the value.
+                elif self.opcode == "GIVEOUT":
                     self.giveout()
 
-                #sets the if_flag.
-                elif self.opcode=="IF":
-                    self.if_flag=True
+                # sets the if_flag.
+                elif self.opcode == "IF":
+                    self.if_flag = True
                     continue
 
-                #pop two elemennts and sets the comparison flag.
-                elif self.opcode=="GREATER":
+                # pop two elemennts and sets the comparison flag.
+                elif self.opcode == "GREATER":
                     self.greater()
 
                 # pop two elemennts and sets the comparison flag.
-                elif self.opcode =="LESSER":
+                elif self.opcode == "LESSER":
                     self.lesser()
 
                 # pop two elemennts and sets the comparison flag.
-                elif self.opcode=="GREATEREQUAL":
+                elif self.opcode == "GREATEREQUAL":
                     self.greater_equal()
 
                 # pop two elemennts and sets the comparison flag.
-                elif self.opcode=="LESSEREQUAL":
+                elif self.opcode == "LESSEREQUAL":
                     self.lesser_equal()
 
                 # pop two elemennts and sets the comparison flag.
-                elif self.opcode =="EQUALS":
+                elif self.opcode == "EQUALS":
                     self.equals()
 
                 # pop two elemennts and sets the comparison flag.
-                elif self.opcode =="NOTEQULTO":
+                elif self.opcode == "NOTEQULTO":
                     self.notequalto()
 
+                elif self.opcode == "STACK":
+                    self.stack_slice()
 
-               # print(self.executionlist)
+                elif self.opcode=="STACKPUSH":
+                    self.stackpush()
+
+                elif self.opcode=="STACKPOP":
+                    self.stackpop()
+
+                elif self.opcode=="STACKISEMPTY":
+                    self.stackempty()
+
+            # print(self.executionlist)
+
+    def stackempty(self):
+        temp=self.executionlist[1]
+        temp2=self.symboldict[temp]
+        if len(temp2)==0:
+            print("stack {} is empty ".format(temp))
+        else:
+            print("stack {} is not empty".format(temp))
+
+    def stackpop(self):
+        temp=self.executionlist[1]
+        self.symboldict[temp].pop()
+
+    def stackpush(self):
+        temp= self.stack.pop()
+        self.symboldict[self.executionlist[1]].append(temp)
+
+    def stack_slice(self):
+        self.symboldict[self.executionlist[1]]=[]
 
 
     def equals(self):
@@ -113,23 +143,37 @@ class interpreter:
 
         self.comparison = temp2 == temp1
 
-    def greater(self):
-        temp1=self.stack.pop()
+    def notequalto(self):
+        temp1 = self.stack.pop()
         if temp1 in self.symboldict:
-            temp1= self.symboldict[temp1]
+            temp1 = self.symboldict[ temp1 ]
         else:
-            temp1=int(temp1)
+            temp1 = int(temp1)
 
-        temp2=self.stack.pop()
+        temp2 = self.stack.pop()
 
         if temp2 in self.symboldict:
-            temp2= int(self.symboldict[temp2])
+            temp2 = int(self.symboldict[ temp2 ])
         else:
-            temp2=int(temp2)
+            temp2 = int(temp2)
+
+        self.comparison = temp2 != temp1
+
+    def greater(self):
+        temp1 = self.stack.pop()
+        if temp1 in self.symboldict:
+            temp1 = self.symboldict[ temp1 ]
+        else:
+            temp1 = int(temp1)
+
+        temp2 = self.stack.pop()
+
+        if temp2 in self.symboldict:
+            temp2 = int(self.symboldict[ temp2 ])
+        else:
+            temp2 = int(temp2)
 
         self.comparison = temp2 > temp1
-
-
 
     def lesser(self):
         temp1 = self.stack.pop()
@@ -180,56 +224,52 @@ class interpreter:
         self.comparison = temp2 <= temp1
 
     def giveout(self):
-        var=self.stack.pop()
-        print("{} = {}".format(var, self.symboldict[var]))
-        
-    def push(self):
-        if self.executionlist[1] in self.symboldict:
-            self.stack.append(self.executionlist[1])
-        else:
-            self.stack.append(self.executionlist[1])
+        var = self.stack.pop()
+        print("{} = {}".format(var, self.symboldict[ var ]))
 
-    
+    def push(self):
+        if self.executionlist[ 1 ] in self.symboldict:
+            self.stack.append(self.executionlist[ 1 ])
+        else:
+            self.stack.append(self.executionlist[ 1 ])
+
     def store(self):
         # self.executionlist[1]=self.stack.pop()
         # self.symboltable.append(self.executionlist[1])
 
-        self.symboldict[self.executionlist[1]]= self.stack.pop()
-
+        self.symboldict[ self.executionlist[ 1 ] ] = self.stack.pop()
 
     def addition(self):
-        temp1 = self.symboldict[self.stack.pop()]
-        temp2 = self.symboldict[self.stack.pop()]
-        temp3= int(temp1) + int(temp2)
+        temp1 = self.symboldict[ self.stack.pop() ]
+        temp2 = self.symboldict[ self.stack.pop() ]
+        temp3 = int(temp1) + int(temp2)
         self.stack.append(temp3)
 
     def subtraction(self):
-        temp1 = self.symboldict[self.stack.pop()]
-        temp2 = self.symboldict[self.stack.pop()]
-        temp3= int(temp2) - int(temp1)
+        temp1 = self.symboldict[ self.stack.pop() ]
+        temp2 = self.symboldict[ self.stack.pop() ]
+        temp3 = int(temp2) - int(temp1)
         self.stack.append(temp3)
 
-
     def multiplication(self):
-        temp1 = self.symboldict[self.stack.pop()]
-        temp2 = self.symboldict[self.stack.pop()]
-        temp3= int(temp2) * int(temp1)
+        temp1 = self.symboldict[ self.stack.pop() ]
+        temp2 = self.symboldict[ self.stack.pop() ]
+        temp3 = int(temp2) * int(temp1)
         self.stack.append(temp3)
 
     def divide(self):
-        temp1 = self.symboldict[self.stack.pop()] 
-        temp2 = self.symboldict[self.stack.pop()] 
-        temp3= int(temp2) // int(temp1)
-        self.stack.append(temp3)                  
+        temp1 = self.symboldict[ self.stack.pop() ]
+        temp2 = self.symboldict[ self.stack.pop() ]
+        temp3 = int(temp2) // int(temp1)
+        self.stack.append(temp3)
 
     def modulus(self):
-        temp1 = self.symboldict[self.stack.pop()]
-        temp2 = self.symboldict[self.stack.pop()]
-        temp3= int(temp2) % int(temp1)
+        temp1 = self.symboldict[ self.stack.pop() ]
+        temp2 = self.symboldict[ self.stack.pop() ]
+        temp3 = int(temp2) % int(temp1)
         self.stack.append(temp3)
 
 
-
-if __name__=="__main__":
-    obj=interpreter()
+if __name__ == "__main__":
+    obj = interpreter()
     obj.readfile()
