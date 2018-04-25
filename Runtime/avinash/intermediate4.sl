@@ -1,12 +1,20 @@
 </
+<<<<<<< HEAD
+PUSH 1
+=======
 PUSH 2
+>>>>>>> 858f161f5f217ab6c88ab90ab23670944fde1ec9
 STORE a
 PUSH 3
 STORE b
 IF
 PUSH a
 PUSH 2
+<<<<<<< HEAD
+NOTEQUALSTO 
+=======
 EQUALS
+>>>>>>> 858f161f5f217ab6c88ab90ab23670944fde1ec9
 </
 PUSH a
 PUSH b
