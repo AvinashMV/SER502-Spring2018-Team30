@@ -115,7 +115,7 @@ public class sliceBaseListener implements sliceListener {
 	 */
 	@Override public void enterStackDec(sliceParser.StackDecContext ctx) {
 		line++;
-		op.add("STACK" +ctx.Id());
+		op.add("STACK " +ctx.Id());
 	}
 	/**
 	 * {@inheritDoc}
