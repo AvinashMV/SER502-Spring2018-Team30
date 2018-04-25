@@ -1,0 +1,8 @@
+</
+a = 2
+b = 3
+stack s1
+s1.push{a}
+c = s1.pop{}
+giveout c
+/>
