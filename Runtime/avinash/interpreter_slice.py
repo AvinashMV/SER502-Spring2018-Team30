@@ -99,17 +99,24 @@ class interpreter:
                 elif self.opcode == "NOTEQULTO":
                     self.notequalto()
 
+                #declare a stack on symbol stack.
                 elif self.opcode == "STACK":
                     self.stack_slice()
 
+                #Pop an element from the system stack and
+                #Push it to declared stack.
                 elif self.opcode=="STACKPUSH":
                     self.stackpush()
 
+                #Pop an element from the declared stack and
+                #get the value from symbol table and assign it to
+                #the required variable.
                 elif self.opcode=="STACKPOP":
                     lastpos=f.tell()
                     self.stackpop(f)
                     f.seek(lastpos)
 
+                #check if the declared empty or not and display the result. 
                 elif self.opcode=="STACKISEMPTY":
                     self.stackempty()
 
