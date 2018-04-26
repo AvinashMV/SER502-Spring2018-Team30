@@ -9,10 +9,10 @@ Instructions For Installation:
 
 To run it:
 1. Download the Slice.zip file
-2. Write a Slice program and save it as a text file
-3. Extract the zip file and go to command line
+2. Extract the zip file and go to command line 
+3. Write a Slice program and save it as a text file
 4. Run java -jar Slice.jar pgm.txt
-5. There will be two new files after running the jar file in java
+5. There will be two new files created after running the jar file in java
     intermediate.sl - The intermediate code generated
     parseTree.pt - The parse tree for reference
 6.Run python Interpreter.py at the same location and enter the name of the intermediate file intermediate.sl
@@ -22,6 +22,7 @@ Instruction for writing code:
 
 1. Only one arithmetic expression is allowed per statement
 2. No indentation or end of line symbols are used since whitespace is ignored. 
+3. '</' and '/>' indicate start and end of the block respectively. 
     
 
 Link To Youtube Video:

@@ -5,13 +5,19 @@ class interpreter:
         self.stack = [ ]
         self.symboltable = [ ]
         self.symboldict = {}
-        self.comparison = False
+        self.comparison_flag = False
         self.if_flag = False
+        self.stack_flag=False
+        self.usingstack=None
+        self.stackpopvalue=None
 
     def readfile(self):
         self.file = input("enter the file: ")
         with open(self.file) as f:
-            for line in f:
+            line=f.readline()
+            while line:
+                line=f.readline()
+           # for line in f:
 
                 # print(line)
                 line = line.rstrip("\n")
@@ -21,10 +27,10 @@ class interpreter:
                 self.opcode = self.executionlist[ 0 ]
 
                 if self.opcode == "</":
-                    if self.if_flag == self.comparison:  # if condition is true.
+                    if self.if_flag == self.comparison_flag:  # if condition is true.
                         continue
 
-                    elif self.if_flag != self.comparison:  # if condition is false.
+                    elif self.if_flag != self.comparison_flag:  # if condition is false.
                         while "/>" not in line:
                             line = next(f)
 
@@ -69,27 +75,27 @@ class interpreter:
                     self.if_flag = True
                     continue
 
-                # pop two elemennts and sets the comparison flag.
+                # pop two elemennts and sets the comparison_flag flag.
                 elif self.opcode == "GREATER":
                     self.greater()
 
-                # pop two elemennts and sets the comparison flag.
+                # pop two elemennts and sets the comparison_flag flag.
                 elif self.opcode == "LESSER":
                     self.lesser()
 
-                # pop two elemennts and sets the comparison flag.
+                # pop two elemennts and sets the comparison_flag flag.
                 elif self.opcode == "GREATEREQUAL":
                     self.greater_equal()
 
-                # pop two elemennts and sets the comparison flag.
+                # pop two elemennts and sets the comparison_flag flag.
                 elif self.opcode == "LESSEREQUAL":
                     self.lesser_equal()
 
-                # pop two elemennts and sets the comparison flag.
+                # pop two elemennts and sets the comparison_flag flag.
                 elif self.opcode == "EQUALS":
                     self.equals()
 
-                # pop two elemennts and sets the comparison flag.
+                # pop two elemennts and sets the comparison_flag flag.
                 elif self.opcode == "NOTEQULTO":
                     self.notequalto()
 
@@ -100,11 +106,14 @@ class interpreter:
                     self.stackpush()
 
                 elif self.opcode=="STACKPOP":
-                    self.stackpop()
+                    lastpos=f.tell()
+                    self.stackpop(f)
+                    f.seek(lastpos)
 
                 elif self.opcode=="STACKISEMPTY":
                     self.stackempty()
 
+                #line =f.readline()
             # print(self.executionlist)
 
     def stackempty(self):
@@ -115,9 +124,16 @@ class interpreter:
         else:
             print("stack {} is not empty".format(temp))
 
-    def stackpop(self):
-        temp=self.executionlist[1]
-        self.symboldict[temp].pop()
+    def stackpop(self,f):
+        linetemp = next(f)  # do a forward look up if next instruction is store?
+        if "STORE" in linetemp:
+            self.stack_flag = True
+            self.usingstack = self.executionlist[ 1 ]
+            self.stackpopvalue=self.symboldict[self.executionlist[1]].pop()
+
+        else:
+            temp = self.executionlist[ 1 ]
+            self.symboldict[ temp ].pop()
 
     def stackpush(self):
         temp= self.stack.pop()
@@ -141,7 +157,7 @@ class interpreter:
         else:
             temp2 = int(temp2)
 
-        self.comparison = temp2 == temp1
+        self.comparison_flag = temp2 == temp1
 
     def notequalto(self):
         temp1 = self.stack.pop()
@@ -157,7 +173,7 @@ class interpreter:
         else:
             temp2 = int(temp2)
 
-        self.comparison = temp2 != temp1
+        self.comparison_flag = temp2 != temp1
 
     def greater(self):
         temp1 = self.stack.pop()
@@ -173,7 +189,7 @@ class interpreter:
         else:
             temp2 = int(temp2)
 
-        self.comparison = temp2 > temp1
+        self.comparison_flag = temp2 > temp1
 
     def lesser(self):
         temp1 = self.stack.pop()
@@ -189,7 +205,7 @@ class interpreter:
         else:
             temp2 = int(temp2)
 
-        self.comparison = temp2 < temp1
+        self.comparison_flag = temp2 < temp1
 
     def greater_equal(self):
         temp1 = self.stack.pop()
@@ -205,7 +221,7 @@ class interpreter:
         else:
             temp2 = int(temp2)
 
-        self.comparison = temp2 >= temp1
+        self.comparison_flag = temp2 >= temp1
 
     def lesser_equal(self):
         temp1 = self.stack.pop()
@@ -221,7 +237,7 @@ class interpreter:
         else:
             temp2 = int(temp2)
 
-        self.comparison = temp2 <= temp1
+        self.comparison_flag = temp2 <= temp1
 
     def giveout(self):
         var = self.stack.pop()
@@ -237,7 +253,16 @@ class interpreter:
         # self.executionlist[1]=self.stack.pop()
         # self.symboltable.append(self.executionlist[1])
 
-        self.symboldict[ self.executionlist[ 1 ] ] = self.stack.pop()
+        if self.stack_flag==True:
+            if self.stackpopvalue in self.symboldict:
+                self.stackpopvalue=self.symboldict[self.stackpopvalue]
+
+            self.symboldict[self.executionlist[1]] = self.stackpopvalue
+            self.stack_flag=False
+            self.usingstack=None
+            self.stackpopvalue=None
+        else:
+            self.symboldict[ self.executionlist[ 1 ] ] = self.stack.pop()
 
     def addition(self):
         temp1 = self.symboldict[ self.stack.pop() ]
