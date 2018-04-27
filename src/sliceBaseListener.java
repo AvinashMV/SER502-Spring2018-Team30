@@ -21,6 +21,9 @@ public class sliceBaseListener implements sliceListener {
 
 
 	int line = 1;
+	int if_counter = 1;
+	int else_counter = 1;
+	int while_counter = 1;
 	/**
 	 * {@inheritDoc}
 	 *
@@ -219,7 +222,8 @@ public class sliceBaseListener implements sliceListener {
 	 */
 	@Override public void enterIfpart(sliceParser.IfpartContext ctx) {
 		ifElseCount.push(1);
-		op.add("IF");
+		op.add("IF "+if_counter);
+		if_counter++;
 	}
 	/**
 	 * {@inheritDoc}
@@ -227,13 +231,15 @@ public class sliceBaseListener implements sliceListener {
 	 * <p>The default implementation does nothing.</p>
 	 */
 	@Override public void exitIfpart(sliceParser.IfpartContext ctx) {
-		op.add("ENDIF");
+		if_counter--;
+		op.add("ENDIF "+if_counter);
 		ifElseCond.push(line);
 		line++;
 		Integer pos = ifElseCond.pop();
 		String prev = op.get(pos);
 		op.set(pos, prev);
 		line++;
+		
 		
 
 	}
@@ -243,7 +249,8 @@ public class sliceBaseListener implements sliceListener {
 	 * <p>The default implementation does nothing.</p>
 	 */
 	@Override public void enterElsepart(sliceParser.ElsepartContext ctx) {
-		op.add("ELSE");
+		op.add("ELSE "+else_counter);
+		else_counter++;
 	}
 	/**
 	 * {@inheritDoc}
@@ -251,8 +258,9 @@ public class sliceBaseListener implements sliceListener {
 	 * <p>The default implementation does nothing.</p>
 	 */
 	@Override public void exitElsepart(sliceParser.ElsepartContext ctx) {
+		else_counter--;
 		ifElseCond.push(line);
-		op.add("ENDELSE");
+		op.add("ENDELSE "+else_counter);
 		line++;
 	}
 	/**
@@ -261,8 +269,9 @@ public class sliceBaseListener implements sliceListener {
 	 * <p>The default implementation does nothing.</p>
 	 */
 	@Override public void enterLoop(sliceParser.LoopContext ctx) {
-		op.add("WHILE");
+		op.add("WHILE "+while_counter);
 		whileStart.push(line);
+		while_counter++;
 	}
 	/**
 	 * {@inheritDoc}
@@ -270,8 +279,9 @@ public class sliceBaseListener implements sliceListener {
 	 * <p>The default implementation does nothing.</p>
 	 */
 	@Override public void exitLoop(sliceParser.LoopContext ctx) {
+		while_counter--;
 		whileCond.push(line);
-		op.add("ENDWHILE");
+		op.add("ENDWHILE "+while_counter);
 		line++;
 		Integer pos = whileCond.pop();
 		String prev = op.get(pos);
