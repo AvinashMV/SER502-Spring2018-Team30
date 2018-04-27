@@ -1,2 +1,2 @@
 []
-(program </ (block (assignment a = (expr (term (factor 2)))) (assignment b = (expr (term (factor 3)))) (stackDec stack s1) (stackOp s1 (stackfunc (push .push { (datatype a) }))) (stackOp s1 (stackfunc (pop .pop { }))) (stackOp s1 (stackfunc (empty .isEmpty { }))) (noreturnOp giveout (datatype s1))) />)
+(program </ (block (assignment a = (expr (term (factor 2)))) (assignment b = (expr (term (factor 3)))) (loop while { (conditionCheck (integerCompare (expr (term (factor a))) != (expr (term (factor 0))))) } </ (block (assignment c = (expr (term (factor a)) (subExpr + (term (factor b))))) (assignment a = (expr (term (factor a)) (subExpr - (term (factor 1))))) (noreturnOp giveout (datatype c))) />)) />)

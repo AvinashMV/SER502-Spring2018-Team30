@@ -1,2 +1,0 @@
-[]
-(program </ (block (assignment a = (expr (term (factor 2)))) (assignment b = (expr (term (factor 3)))) (loop while { (conditionCheck (integerCompare (expr (term (factor a))) != (expr (term (factor 0))))) } </ (block (assignment c = (expr (term (factor a)) (subExpr + (term (factor b))))) (assignment a = (expr (term (factor a)) (subExpr - (term (factor 1))))) (noreturnOp giveout (datatype c))) />)) />)

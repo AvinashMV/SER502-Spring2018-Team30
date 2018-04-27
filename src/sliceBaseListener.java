@@ -261,9 +261,7 @@ public class sliceBaseListener implements sliceListener {
 	 * <p>The default implementation does nothing.</p>
 	 */
 	@Override public void exitElsepart(sliceParser.ElsepartContext ctx) {
-		op.add("TESTFGOTO");
-		ifElseCond.push(line);
-		line++;
+		
 	}
 	/**
 	 * {@inheritDoc}
@@ -280,17 +278,7 @@ public class sliceBaseListener implements sliceListener {
 	 * <p>The default implementation does nothing.</p>
 	 */
 	@Override public void exitLoop(sliceParser.LoopContext ctx) {
-		whileCond.push(line);
-		op.add("TESTFGOTO");
-		line++;
-
-		op.add("PUSH True");
-		op.add("TESTTGOTO " + whileStart.pop());
-		Integer pos = whileCond.pop();
-		String prev = op.get(pos);
-		prev += " " + (line + 1);
-		op.set(pos, prev);
-		line++;
+	
 
 	}
 	/**
