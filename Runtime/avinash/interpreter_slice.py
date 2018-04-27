@@ -292,11 +292,11 @@ class interpreter:
     def addition(self):
         temp1 = self.stack.pop()
         if temp1 in self.symboldict:
-            temp1= self.symboldict[ self.stack.pop() ]
+            temp1= self.symboldict[ temp1 ]
 
         temp2= self.stack.pop()
         if temp2 in self.symboldict:
-            temp2 = self.symboldict[ self.stack.pop() ]
+            temp2 = self.symboldict[ temp2 ]
 
         temp3 = int(temp1) + int(temp2)
         self.stack.append(temp3)
@@ -304,11 +304,11 @@ class interpreter:
     def subtraction(self):
         temp1 = self.stack.pop()
         if temp1 in self.symboldict:
-            temp1 = self.symboldict[ self.stack.pop() ]
+            temp1 = self.symboldict[ temp1 ]
 
         temp2 = self.stack.pop()
         if temp2 in self.symboldict:
-            temp2 = self.symboldict[ self.stack.pop() ]
+            temp2 = self.symboldict[ temp2 ]
 
         temp3 = int(temp2) - int(temp1)
         self.stack.append(temp3)
@@ -316,11 +316,11 @@ class interpreter:
     def multiplication(self):
         temp1 = self.stack.pop()
         if temp1 in self.symboldict:
-            temp1 = self.symboldict[ self.stack.pop() ]
+            temp1 = self.symboldict[ temp1 ]
 
         temp2 = self.stack.pop()
         if temp2 in self.symboldict:
-            temp2 = self.symboldict[ self.stack.pop() ]
+            temp2 = self.symboldict[ temp2 ]
 
         temp3 = int(temp2) * int(temp1)
         self.stack.append(temp3)
@@ -328,11 +328,11 @@ class interpreter:
     def divide(self):
         temp1 = self.stack.pop()
         if temp1 in self.symboldict:
-            temp1 = self.symboldict[ self.stack.pop() ]
+            temp1 = self.symboldict[ temp1 ]
 
         temp2 = self.stack.pop()
         if temp2 in self.symboldict:
-            temp2 = self.symboldict[ self.stack.pop() ]
+            temp2 = self.symboldict[ temp2 ]
 
         temp3 = int(temp2) // int(temp1)
         self.stack.append(temp3)
@@ -340,12 +340,12 @@ class interpreter:
     def modulus(self):
         temp1 = self.stack.pop()
         if temp1 in self.symboldict:
-            temp1 = self.symboldict[ self.stack.pop() ]
+            temp1 = self.symboldict[ temp1 ]
 
         temp2 = self.stack.pop()
         if temp2 in self.symboldict:
-            temp2 = self.symboldict[ self.stack.pop() ]
-            
+            temp2 = self.symboldict[ temp2 ]
+
         temp3 = int(temp2) % int(temp1)
         self.stack.append(temp3)
 
