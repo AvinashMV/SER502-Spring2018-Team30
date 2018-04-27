@@ -10,12 +10,14 @@ class interpreter:
         self.stack_flag=False
         self.usingstack=None
         self.stackpopvalue=None
+        self.while_flag=None
 
     def readfile(self):
         self.file = input("enter the file: ")
         with open(self.file) as f:
             line=f.readline()
             while line:
+
                 line=f.readline()
            # for line in f:
 
@@ -27,12 +29,18 @@ class interpreter:
                 self.opcode = self.executionlist[ 0 ]
 
                 if self.opcode == "</":
-                    if self.if_flag == self.comparison_flag:  # if condition is true.
+                    if self.if_flag == True and  self.comparison_flag==True:  # if condition is true.
                         continue
 
-                    elif self.if_flag != self.comparison_flag:  # if condition is false.
+                    elif self.if_flag ==True and  self.comparison_flag==False:  # if condition is false.
                         while "/>" not in line:
                             line = next(f)
+
+                    elif self.while_flag==True and self.comparison_flag==False:
+                        self.while_flag=False
+                        while "ENDWHILE" not in line:
+                            line=next(f)
+
 
                 # will push to stack.
                 # PUSH a , PUSH 3
@@ -96,7 +104,7 @@ class interpreter:
                     self.equals()
 
                 # pop two elemennts and sets the comparison_flag flag.
-                elif self.opcode == "NOTEQULTO":
+                elif self.opcode == "NOTEQUALTO":
                     self.notequalto()
 
                 #declare a stack on symbol stack.
@@ -116,12 +124,22 @@ class interpreter:
                     self.stackpop(f)
                     f.seek(lastpos)
 
-                #check if the declared empty or not and display the result. 
+                #check if the declared empty or not and display the result.
                 elif self.opcode=="STACKISEMPTY":
                     self.stackempty()
 
+
+                elif self.opcode=="WHILE":
+                    self.while_flag=True
+                    self.whilepos=f.tell()
+
+                elif self.opcode=="ENDWHILE":
+                    f.seek(self.whilepos)
+
+
                 #line =f.readline()
             # print(self.executionlist)
+
 
     def stackempty(self):
         temp=self.executionlist[1]
@@ -272,32 +290,62 @@ class interpreter:
             self.symboldict[ self.executionlist[ 1 ] ] = self.stack.pop()
 
     def addition(self):
-        temp1 = self.symboldict[ self.stack.pop() ]
-        temp2 = self.symboldict[ self.stack.pop() ]
+        temp1 = self.stack.pop()
+        if temp1 in self.symboldict:
+            temp1= self.symboldict[ self.stack.pop() ]
+
+        temp2= self.stack.pop()
+        if temp2 in self.symboldict:
+            temp2 = self.symboldict[ self.stack.pop() ]
+
         temp3 = int(temp1) + int(temp2)
         self.stack.append(temp3)
 
     def subtraction(self):
-        temp1 = self.symboldict[ self.stack.pop() ]
-        temp2 = self.symboldict[ self.stack.pop() ]
+        temp1 = self.stack.pop()
+        if temp1 in self.symboldict:
+            temp1 = self.symboldict[ self.stack.pop() ]
+
+        temp2 = self.stack.pop()
+        if temp2 in self.symboldict:
+            temp2 = self.symboldict[ self.stack.pop() ]
+
         temp3 = int(temp2) - int(temp1)
         self.stack.append(temp3)
 
     def multiplication(self):
-        temp1 = self.symboldict[ self.stack.pop() ]
-        temp2 = self.symboldict[ self.stack.pop() ]
+        temp1 = self.stack.pop()
+        if temp1 in self.symboldict:
+            temp1 = self.symboldict[ self.stack.pop() ]
+
+        temp2 = self.stack.pop()
+        if temp2 in self.symboldict:
+            temp2 = self.symboldict[ self.stack.pop() ]
+
         temp3 = int(temp2) * int(temp1)
         self.stack.append(temp3)
 
     def divide(self):
-        temp1 = self.symboldict[ self.stack.pop() ]
-        temp2 = self.symboldict[ self.stack.pop() ]
+        temp1 = self.stack.pop()
+        if temp1 in self.symboldict:
+            temp1 = self.symboldict[ self.stack.pop() ]
+
+        temp2 = self.stack.pop()
+        if temp2 in self.symboldict:
+            temp2 = self.symboldict[ self.stack.pop() ]
+
         temp3 = int(temp2) // int(temp1)
         self.stack.append(temp3)
 
     def modulus(self):
-        temp1 = self.symboldict[ self.stack.pop() ]
-        temp2 = self.symboldict[ self.stack.pop() ]
+        temp1 = self.stack.pop()
+        if temp1 in self.symboldict:
+            temp1 = self.symboldict[ self.stack.pop() ]
+
+        temp2 = self.stack.pop()
+        if temp2 in self.symboldict:
+            temp2 = self.symboldict[ self.stack.pop() ]
+            
         temp3 = int(temp2) % int(temp1)
         self.stack.append(temp3)
 
