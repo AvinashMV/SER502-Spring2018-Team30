@@ -12,7 +12,7 @@ public class sliceRunner {
     public static void main(String[] args) throws Exception {
         //Please specify the input filename as an argument when running this file
         org.antlr.v4.runtime.CharStream data =  CharStreams.fromFileName("C:\\Users\\Vaishak\\Documents"
-        		+ "\\GitHub\\SER502-Spring2018-Team30\\examples\\Input Files\\Input 7.txt");
+        		+ "\\GitHub\\SER502-Spring2018-Team30\\examples\\Input Files\\Input 8.txt");
         sliceLexer lexer = new sliceLexer(data);
 
         CommonTokenStream tokens = new CommonTokenStream(lexer);
@@ -22,7 +22,7 @@ public class sliceRunner {
         // print LISP-style tree in file parseTree.pt
         try {
             PrintWriter writer = new PrintWriter("C:\\Users\\Vaishak\\Documents\\GitHub\\SER502-Spring2018-Team30"
-            		+ "\\examples\\parseTree7.pt", "UTF-8");
+            		+ "\\examples\\parseTree8.pt", "UTF-8");
             writer.println(tree);
             writer.println(tree.toStringTree(parser));
             writer.close();
@@ -36,7 +36,7 @@ public class sliceRunner {
         // print the output in the file output.sl
         try {
             PrintWriter writer = new PrintWriter("C:\\Users\\Vaishak\\Documents\\GitHub\\SER502-Spring2018-Team30"
-            		+ "\\examples\\intermediate7.sl", "UTF-8");
+            		+ "\\examples\\intermediate8.sl", "UTF-8");
             for (int i = 1; i < extractor.op.size(); i++) {
                 writer.println(extractor.op.get(i));
             }
