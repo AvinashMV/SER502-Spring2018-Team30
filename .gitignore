@@ -8,4 +8,5 @@ SER502-Spring2018-Team30.iml
 .project
 /bin/
 /venv/*
+/src/sliceRunner.java
 
