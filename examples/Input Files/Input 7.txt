@@ -2,18 +2,17 @@
 	a = 5
 	b = 9
 	c = a+b
-	if { c >= 4}
+	if { c <= 4}
 	</
 		while{c !=0}
 		</
-			a =3
-			k = a+1
-			giveout k
+			c = c - 2
+			giveout c
 		/>
 	/>
 	else
 	</
-		giveout c
+		giveout b
 	/>
 
 />

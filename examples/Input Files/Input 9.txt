@@ -1,0 +1,15 @@
+</
+a = 2
+b = 3
+if { a > 3 }
+</
+	c = a + b
+	giveout c
+/>
+else
+</
+	c = b -a
+	giveout c
+/>
+/>
+
