@@ -267,11 +267,7 @@ public class sliceBaseListener implements sliceListener {
 	 * <p>The default implementation does nothing.</p>
 	 */
 	@Override public void exitLoop(sliceParser.LoopContext ctx) {
-<<<<<<< HEAD
-	
-=======
-
->>>>>>> 9be2bed4c67326c830bc5eb17aad0ee82ac37c0d
+		op.add("ENDWHILE");
 
 	}
 	/**
