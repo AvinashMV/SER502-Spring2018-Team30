@@ -235,8 +235,8 @@ public class sliceBaseListener implements sliceListener {
 		String prev = op.get(pos);
 		op.set(pos, prev);
 		line++;
-		
-		
+
+
 
 	}
 	/**
@@ -245,13 +245,8 @@ public class sliceBaseListener implements sliceListener {
 	 * <p>The default implementation does nothing.</p>
 	 */
 	@Override public void enterElsepart(sliceParser.ElsepartContext ctx) {
-<<<<<<< HEAD
 		op.add("ELSE ");
 
-=======
-		op.add("ELSE "+if_counter);
-		//else_counter++;
->>>>>>> 7db807745836da9ab7715e3fe1b33a4e00d4d131
 	}
 	/**
 	 * {@inheritDoc}
@@ -259,15 +254,9 @@ public class sliceBaseListener implements sliceListener {
 	 * <p>The default implementation does nothing.</p>
 	 */
 	@Override public void exitElsepart(sliceParser.ElsepartContext ctx) {
-<<<<<<< HEAD
 
 		ifElseCond.push(line);
 		op.add("ENDELSE ");			// keyword to identify end of else block
-=======
-		//else_counter--;
-		ifElseCond.push(line);
-		op.add("ENDELSE "+if_counter);
->>>>>>> 7db807745836da9ab7715e3fe1b33a4e00d4d131
 		line++;
 	}
 	/**
@@ -545,14 +534,14 @@ public class sliceBaseListener implements sliceListener {
 	 * <p>The default implementation does nothing.</p>
 	 */
 	@Override public void enterBoolFactor(sliceParser.BoolFactorContext ctx) {
-			if(ctx.Id() != null){
-				line++;
-				op.add("PUSH " + ctx.Id());
-			} else if(ctx.Bool() != null){
-				line++;
-				op.add("PUSH " + ctx.Bool());
-			}
+		if(ctx.Id() != null){
+			line++;
+			op.add("PUSH " + ctx.Id());
+		} else if(ctx.Bool() != null){
+			line++;
+			op.add("PUSH " + ctx.Bool());
 		}
+	}
 	/**
 	 * {@inheritDoc}
 	 *
