@@ -9,3 +9,9 @@ Lexical Analysis and Programs    - 50% Darshan 50% Sanay
 Built Lexer and Parser Files	 - 50% Darshan 50% Sanay
 
 Built Listener and Runnerr 	 - 50% Vaishak 50% Avinash
+
+Built Runtime Interpreter     - 40% Avinash 40% Vaishak 10% Sanay 10%Darshan
+
+Testing Interpreter          - 40%Sanay 40%Darshan 10%Vaishak 10%Avinash
+
+Documentation                 - 50% Sanay 50%Darshan
