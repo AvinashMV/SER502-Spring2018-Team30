@@ -29,13 +29,16 @@ Instruction for writing code:
 6. // Used for comments
 
 Syntax for Program:
+
 </
-//comments
-//declaration
-//control structure
-//looping structure
-//stack operations
-//print statement for initialised identifiers
+
+    //comments
+    //declaration
+    //control structure
+    //looping structure
+    //stack operations
+    //print statement for initialised identifiers
+    
 />
 
 Syntax for Declaration:
@@ -50,28 +53,38 @@ ID ('>' | '<' | '==' | '<=' | '>='| '!=') ID|NUM
 Syntax for Control Structure:
 
 if { Condition expression }
+
 </
+
     //declaration
     //stack operations
     //looping structure ( one loop is allowed )
     //print statement for initialised identifiers
+    
 />
+
 else //( optional block )
+
 </
+
     //declaration
     //stack operations
     //looping structure ( one loop is allowed )
     //print statement for initialised identifiers
+    
 />
 
 Syntax for Looping Structure:
 
 while { Condition expression }
+
 </
+
     //declaration
     //stack operations
     //looping structure ( one loop is allowed )
     //print statement for initialised identifiers
+    
 />
 
 Syntax for Stack Operations:
