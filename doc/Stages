@@ -1,5 +1,0 @@
-The interpreter will execute in three stages:
-
-Split characters in the source code into tokens
-Organize the tokens into an abstract syntax tree (AST). The AST is our intermediate representation.
-Evaluate the AST and print the state at the end
