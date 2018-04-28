@@ -3,7 +3,7 @@ PUSH 2
 STORE a
 PUSH 3
 STORE b
-IF
+IF 
 PUSH a
 PUSH 1
 GREATER
@@ -15,5 +15,6 @@ STORE c
 PUSH c
 GIVEOUT
 />
+ENDIF 
 />
 
