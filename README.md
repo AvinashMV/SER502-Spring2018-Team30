@@ -43,7 +43,8 @@ ID = NUM | ID
 Stack ID
 
 Synatx for Condition expression:
-ID =
+ID ('>' | '<' | '==' | '<=' | '>='| '!=') ID|NUM
+
 Syntax for Control Structure:
 if { Condition expression }
 </
