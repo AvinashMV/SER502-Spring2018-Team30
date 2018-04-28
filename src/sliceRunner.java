@@ -7,17 +7,11 @@ import java.io.PrintWriter;
 
 public class sliceRunner {
     public static void main(String[] args) throws Exception {
-<<<<<<< HEAD
 
         //get the character stream from the input file
         org.antlr.v4.runtime.CharStream data =  CharStreams.fromFileName("/Users/darshan/IdeaProjects/SER502-Spring2018-Team30/examples/Input Files/Input 9.txt");
 
         //pass the character stream to lexer
-=======
-        //Please specify the input filename as an argument when running this file
-        org.antlr.v4.runtime.CharStream data =  CharStreams.fromFileName("C:\\Users\\Vaishak\\Documents"
-        		+ "\\GitHub\\SER502-Spring2018-Team30\\examples\\Input Files\\Input 11.txt");
->>>>>>> 7db807745836da9ab7715e3fe1b33a4e00d4d131
         sliceLexer lexer = new sliceLexer(data);
 
         // generate tokens
