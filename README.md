@@ -39,13 +39,16 @@ Syntax for Program:
 />
 
 Syntax for Declaration:
+
 ID = NUM | ID
 Stack ID
 
 Synatx for Condition expression:
+
 ID ('>' | '<' | '==' | '<=' | '>='| '!=') ID|NUM
 
 Syntax for Control Structure:
+
 if { Condition expression }
 </
     //declaration
@@ -62,6 +65,7 @@ else //( optional block )
 />
 
 Syntax for Looping Structure:
+
 while { Condition expression }
 </
     //declaration
@@ -71,11 +75,13 @@ while { Condition expression }
 />
 
 Syntax for Stack Operations:
+
 stack_ID.push{ ID | NUM }
 stack_ID.pop{}
 stack_ID.isEmpty{}
 
 Syntax for Print:
+
 giveout ID | NUM 
 
 
