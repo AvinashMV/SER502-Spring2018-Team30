@@ -33,15 +33,10 @@ Syntax for Program:
 </
 
     //comments
-
     //declaration
-    
     //control structure
-    
     //looping structure
-    
     //stack operations
-    
     //print statement for initialised identifiers
     
 />
@@ -62,24 +57,19 @@ if { Condition expression }
 </
 
     //declaration
-    
     //stack operations
-    
     //looping structure ( one loop is allowed )
-    
     //print statement for initialised identifiers
     
 />
+
 else //( optional block )
 
 </
 
     //declaration
-   
     //stack operations
-    
     //looping structure ( one loop is allowed )
-    
     //print statement for initialised identifiers
     
 />
@@ -91,11 +81,8 @@ while { Condition expression }
 </
 
     //declaration
-    
     //stack operations
-    
     //looping structure ( one loop is allowed )
-    
     //print statement for initialised identifiers
     
 />
