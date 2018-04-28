@@ -155,7 +155,7 @@ class interpreter:
                 elif self.opcode == "ENDWHILE":
                     f.seek(self.whilepos)
 
-    #Functions for each operation. 
+    #Functions for each operation.
 
     def stackempty(self):
         temp = self.executionlist[ 1 ]
