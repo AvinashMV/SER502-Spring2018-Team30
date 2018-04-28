@@ -20,7 +20,8 @@ public class sliceBaseListener implements sliceListener {
 	Stack<Integer> ifElseCond = new Stack<Integer>();
 
 
-	int line = 1;
+	int line = 1;		// counter to keep the line count for generating intermediate code line by line
+
 	/**
 	 * {@inheritDoc}
 	 *
@@ -44,7 +45,7 @@ public class sliceBaseListener implements sliceListener {
 	 */
 	@Override public void enterBlock(sliceParser.BlockContext ctx) {
 		line++;
-		op.add("</");
+		op.add("</");		//start block indicator
 	}
 	/**
 	 * {@inheritDoc}
@@ -53,7 +54,7 @@ public class sliceBaseListener implements sliceListener {
 	 */
 	@Override public void exitBlock(sliceParser.BlockContext ctx) {
 		line++;
-		op.add("/>");
+		op.add("/>");		//end block indicator
 	}
 	/**
 	 * {@inheritDoc}
@@ -68,7 +69,7 @@ public class sliceBaseListener implements sliceListener {
 	 */
 	@Override public void exitNoreturnOp(sliceParser.NoreturnOpContext ctx) {
 		line++;
-		op.add("GIVEOUT");
+		op.add("GIVEOUT");		//print keyword
 	}
 	/**
 	 * {@inheritDoc}
@@ -77,7 +78,7 @@ public class sliceBaseListener implements sliceListener {
 	 */
 	@Override public void enterInput(sliceParser.InputContext ctx) {
 		line++;
-		op.add("TAKEIN");
+		op.add("TAKEIN");		//read keyword
 	}
 	/**
 	 * {@inheritDoc}
@@ -93,13 +94,13 @@ public class sliceBaseListener implements sliceListener {
 	@Override public void enterDatatype(sliceParser.DatatypeContext ctx) {
 		if(ctx.Num()!=null){
 			line++;
-			op.add("PUSH " + ctx.Num());
+			op.add("PUSH " + ctx.Num());		//keyword to identify pushing int values to stack
 		}else if(ctx.Bool()!=null){
 			line++;
-			op.add("PUSH " + ctx.Bool());
+			op.add("PUSH " + ctx.Bool());		//keyword to identify pushing boolean values to stack
 		}else{
 			line++;
-			op.add("PUSH " + ctx.Id());
+			op.add("PUSH " + ctx.Id());			//keyword to identify pushing id  to stack
 		}
 	}
 	/**
@@ -115,7 +116,7 @@ public class sliceBaseListener implements sliceListener {
 	 */
 	@Override public void enterStackDec(sliceParser.StackDecContext ctx) {
 		line++;
-		op.add("STACK " +ctx.Id());
+		op.add("STACK " +ctx.Id());			// keyword to identify stack declaration
 	}
 	/**
 	 * {@inheritDoc}
@@ -140,13 +141,13 @@ public class sliceBaseListener implements sliceListener {
 	@Override public void exitStackOp(sliceParser.StackOpContext ctx) {
 		if(ctx.stackfunc().pop() != null ){
 			line++;
-			op.add("STACKPOP " + ctx.Id());
+			op.add("STACKPOP " + ctx.Id());				// keyword to identify popping of stack
 		} else if(ctx.stackfunc().push() != null ){
 			line++;
-			op.add("STACKPUSH " + ctx.Id());
+			op.add("STACKPUSH " + ctx.Id());			// keyword ti identify pushing value to stack
 		} else{
 			line++;
-			op.add("STACKISEMPTY " + ctx.Id());
+			op.add("STACKISEMPTY " + ctx.Id());			// keyword to check if stack is empty
 		}
 	}
 	/**
@@ -210,12 +211,6 @@ public class sliceBaseListener implements sliceListener {
 	 */
 	@Override public void exitCondition(sliceParser.ConditionContext ctx) {
 		Integer count = ifElseCount.pop();
-		for(int i=0;i<count;i++){
-			Integer pos = ifElseEnd.pop();
-			String prev = op.get(pos);
-			prev += " " + (line);
-			op.set(pos, prev);
-		}
 	}
 
 	/**
@@ -225,7 +220,7 @@ public class sliceBaseListener implements sliceListener {
 	 */
 	@Override public void enterIfpart(sliceParser.IfpartContext ctx) {
 		ifElseCount.push(1);
-		op.add("IF");
+		op.add("IF ");			// keyword to identify start of if block
 	}
 	/**
 	 * {@inheritDoc}
@@ -233,6 +228,14 @@ public class sliceBaseListener implements sliceListener {
 	 * <p>The default implementation does nothing.</p>
 	 */
 	@Override public void exitIfpart(sliceParser.IfpartContext ctx) {
+		op.add("ENDIF ");			// keyword to identify end of if block
+		ifElseCond.push(line);
+		line++;
+		Integer pos = ifElseCond.pop();
+		String prev = op.get(pos);
+		op.set(pos, prev);
+		line++;
+
 
 
 	}
@@ -242,7 +245,8 @@ public class sliceBaseListener implements sliceListener {
 	 * <p>The default implementation does nothing.</p>
 	 */
 	@Override public void enterElsepart(sliceParser.ElsepartContext ctx) {
-		op.add("ELSE");
+		op.add("ELSE ");
+
 	}
 	/**
 	 * {@inheritDoc}
@@ -250,7 +254,10 @@ public class sliceBaseListener implements sliceListener {
 	 * <p>The default implementation does nothing.</p>
 	 */
 	@Override public void exitElsepart(sliceParser.ElsepartContext ctx) {
-		
+
+		ifElseCond.push(line);
+		op.add("ENDELSE ");			// keyword to identify end of else block
+		line++;
 	}
 	/**
 	 * {@inheritDoc}
@@ -258,8 +265,9 @@ public class sliceBaseListener implements sliceListener {
 	 * <p>The default implementation does nothing.</p>
 	 */
 	@Override public void enterLoop(sliceParser.LoopContext ctx) {
-		op.add("WHILE");
+		op.add("WHILE ");			// keyword to identify start of while block
 		whileStart.push(line);
+
 	}
 	/**
 	 * {@inheritDoc}
@@ -267,7 +275,14 @@ public class sliceBaseListener implements sliceListener {
 	 * <p>The default implementation does nothing.</p>
 	 */
 	@Override public void exitLoop(sliceParser.LoopContext ctx) {
-		op.add("ENDWHILE");
+
+		whileCond.push(line);		// keyword to identify end of while block
+		op.add("ENDWHILE ");
+		line++;
+		Integer pos = whileCond.pop();
+		String prev = op.get(pos);
+		op.set(pos, prev);
+		line++;
 
 	}
 	/**
@@ -297,27 +312,27 @@ public class sliceBaseListener implements sliceListener {
 		switch(ctx.CompareInt().toString()){
 			case ">":
 				line++;
-				op.add("GREATER");
+				op.add("GREATER");			// keyword to identify greater than symbol
 				break;
 			case "<":
 				line++;
-				op.add("LESSER");
+				op.add("LESSER");			// keyword to identify lesser than symbol
 				break;
 			case ">=":
 				line++;
-				op.add("GREATEREQUAL");
+				op.add("GREATEREQUAL");		// keyword to identify greater than or equal to
 				break;
 			case "<=":
 				line++;
-				op.add("LESSEREQUAL");
+				op.add("LESSEREQUAL");		// keyword to identify lesser than or equal to
 				break;
 			case "==":
 				line++;
-				op.add("EQUALS");
+				op.add("EQUALS");			// keyword to identify equals to
 				break;
 			case "!=":
 				line++;
-				op.add("NOTEQUALTO");
+				op.add("NOTEQUALTO");		// keyword to identify not equal to
 				break;
 		}
 	}
@@ -349,7 +364,7 @@ public class sliceBaseListener implements sliceListener {
 	 */
 	@Override public void exitAssignment(sliceParser.AssignmentContext ctx) {
 		line++;
-		op.add("STORE " + ctx.Id());
+		op.add("STORE " + ctx.Id());		// keyword to identify storing elements on the stack in interpreter
 	}
 	/**
 	 * {@inheritDoc}
@@ -379,10 +394,10 @@ public class sliceBaseListener implements sliceListener {
 		String a="";
 		switch(ctx.AdditionOp().toString()){
 			case "+":
-				a = "ADDITION";
+				a = "ADDITION";			// keyword to identify addition operation
 				break;
 			case "-":
-				a = "SUBTRACTION";
+				a = "SUBTRACTION";		// keyword to identify subtraction operation
 				break;
 		}
 		return a;
@@ -419,13 +434,13 @@ public class sliceBaseListener implements sliceListener {
 		String a="";
 		switch(ctx.MultiplicationOp().toString()){
 			case "*":
-				a = "MULTIPLICATION";
+				a = "MULTIPLICATION";		// keyword to identify multiplication operation
 				break;
 			case "/":
-				a = "DIVISION";
+				a = "DIVISION";				// keyword to identify division operation
 				break;
 			case "%":
-				a = "MODULUS";
+				a = "MODULUS";				// keyword to identify modulus operation
 				break;
 
 		}
@@ -481,7 +496,7 @@ public class sliceBaseListener implements sliceListener {
 	@Override public void exitBoolSubExpression(sliceParser.BoolSubExpressionContext ctx) {
 		if(ctx.BooleanOR() != null){
 			line++;
-			op.add("OR");
+			op.add("OR");			// keyword to identify boolean
 		}
 	}
 	/**
@@ -510,7 +525,7 @@ public class sliceBaseListener implements sliceListener {
 	@Override public void exitSubBoolTerm(sliceParser.SubBoolTermContext ctx) {
 		if (ctx.BooleanAnd() != null) {
 			line++;
-			op.add("AND");
+			op.add("AND");			// keyword to identify boolean and
 		}
 	}
 	/**
@@ -519,14 +534,14 @@ public class sliceBaseListener implements sliceListener {
 	 * <p>The default implementation does nothing.</p>
 	 */
 	@Override public void enterBoolFactor(sliceParser.BoolFactorContext ctx) {
-			if(ctx.Id() != null){
-				line++;
-				op.add("PUSH " + ctx.Id());
-			} else if(ctx.Bool() != null){
-				line++;
-				op.add("PUSH " + ctx.Bool());
-			}
+		if(ctx.Id() != null){
+			line++;
+			op.add("PUSH " + ctx.Id());
+		} else if(ctx.Bool() != null){
+			line++;
+			op.add("PUSH " + ctx.Bool());
 		}
+	}
 	/**
 	 * {@inheritDoc}
 	 *
