@@ -12,7 +12,7 @@ public class sliceRunner {
     public static void main(String[] args) throws Exception {
         //Please specify the input filename as an argument when running this file
         org.antlr.v4.runtime.CharStream data =  CharStreams.fromFileName("C:\\Users\\Vaishak\\Documents"
-        		+ "\\GitHub\\SER502-Spring2018-Team30\\examples\\Input Files\\Input 10.txt");
+        		+ "\\GitHub\\SER502-Spring2018-Team30\\examples\\Input Files\\Input 11.txt");
         sliceLexer lexer = new sliceLexer(data);
 
         CommonTokenStream tokens = new CommonTokenStream(lexer);
