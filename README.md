@@ -51,10 +51,15 @@ Syntax for Control Structure:
 
 if { Condition expression }
 </
+
     //declaration
+    
     //stack operations
+    
     //looping structure ( one loop is allowed )
+    
     //print statement for initialised identifiers
+    
 />
 else //( optional block )
 </
