@@ -9,7 +9,7 @@ public class sliceRunner {
     public static void main(String[] args) throws Exception {
 
         //get the character stream from the input file
-        org.antlr.v4.runtime.CharStream data =  CharStreams.fromFileName("/Users/darshan/IdeaProjects/SER502-Spring2018-Team30/examples/Input Files/Input 8.txt");
+        org.antlr.v4.runtime.CharStream data =  CharStreams.fromFileName(args[0]);
 
         //pass the character stream to lexer
         sliceLexer lexer = new sliceLexer(data);
@@ -25,7 +25,7 @@ public class sliceRunner {
         try {
 
             //generate parse tree file
-            PrintWriter writer = new PrintWriter("/Users/darshan/IdeaProjects/SER502-Spring2018-Team30/examples/Parse Tree/parseTree8.pt", "UTF-8");
+            PrintWriter writer = new PrintWriter("parseTree.pt", "UTF-8");
             writer.println(tree);
             writer.println(tree.toStringTree(parser));
             writer.close();
@@ -43,7 +43,7 @@ public class sliceRunner {
 
         // print the output in the file output.sl
         try {
-            PrintWriter writer = new PrintWriter("/Users/darshan/IdeaProjects/SER502-Spring2018-Team30/examples/Intermediate Code/intermediate8.sl", "UTF-8");
+            PrintWriter writer = new PrintWriter("intermediate.sl", "UTF-8");
             for (int i = 1; i < extractor.op.size(); i++) {
                 writer.println(extractor.op.get(i));
             }
