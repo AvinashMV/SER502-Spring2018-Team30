@@ -9,7 +9,6 @@ class interpreter:
         self.symboldict = {}
         self.comparison_flag = False
         self.if_flag = False
-        self.else_flag = False
         self.stack_flag = False
         self.usingstack = None
         self.using_if = None
@@ -33,11 +32,11 @@ class interpreter:
 
                 if self.opcode == "</":
                     if self.if_flag == True and self.comparison_flag == True:  # if condition is true.
-                        self.else_flag == False  # else part should not run
+                     # else part should not run
                         continue
 
                     elif self.if_flag == True and self.comparison_flag == False:  # if condition is false.
-                        self.else_flag = True
+                        self.if_flag=False    # indicating that if part did not run.
                         while "ENDIF" not in line:
                             line = next(f)
 
@@ -48,10 +47,10 @@ class interpreter:
 
 
                 elif self.opcode == "ENDELSE":
-                    self.else_flag == None
+                    self.if_flag=None
 
                 elif self.opcode == "ELSE":
-                    if self.else_flag == False:  # else should not run
+                    if self.if_flag == True:  # else should not run
                         while "ENDELSE" not in line:
                             line = next(f)
 
@@ -93,7 +92,6 @@ class interpreter:
 
                 # sets the if_flag.
                 elif self.opcode == "IF":
-                    # self.stack.append("IF")
                     self.if_flag = True
                     self.using_if = self.executionlist[ 1 ]
 
