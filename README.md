@@ -16,8 +16,9 @@ To run it:
 
     intermediate.sl - The intermediate code generated
     parseTree.pt - The parse tree for reference
-6.Run python interpreter_slice.py at the same location and enter the name of the intermediate file intermediate.sl
-7.The output will be displayed on the terminal.
+    
+6. Run python interpreter_slice.py at the same location and enter the name of the intermediate file intermediate.sl
+7. The output will be displayed on the terminal.
 
 Instruction for writing code:
 
